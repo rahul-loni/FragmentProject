@@ -27,21 +27,28 @@ public class MainActivity extends AppCompatActivity {
         frameLayout=findViewById(R.id.framelayout);
         tabLayout=findViewById(R.id.tablayout);
 
+        getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,new FiratFragment())
+                .addToBackStack(null)
+                .commit();
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 Fragment fragment=null;
                 switch(tab.getPosition()){
                     case 0:
-                            fragment=new FiratFragment();
+                        fragment=new FiratFragment();
+                        break;
                     case 1:
                         fragment=new SecondFragment();
+                        break;
                     case 2:
                         fragment=new ThirdFragment();
+                        break;
                 }
-
                 getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,fragment)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .commit();
+
             }
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
